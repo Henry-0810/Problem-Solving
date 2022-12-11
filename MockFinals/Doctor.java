@@ -17,7 +17,7 @@ public final class Doctor extends Person{
         setEmployeeID();
         setSpeciality(speciality);
         setStartDate(startDate);
-        this.patients = new ArrayList<>();
+        patients = new ArrayList<>();
     }
 
     public int getEmployeeID() {
@@ -50,19 +50,21 @@ public final class Doctor extends Person{
     }
 
     public void addPatient(Patient patient){
-        this.patients.add(patient);
+        patients.add(patient);
     }
 
     @Override
     public String toString() {
-        String output = super.toString() + "\nEmployee ID: " + getEmployeeID() + "\nSpeciality: " + getSpeciality() +
+        StringBuilder output = new StringBuilder(super.toString() + "\nEmployee ID: " + getEmployeeID() + "\nSpeciality: " + getSpeciality() +
                 "\nStart Date: " + getStartDate().get(Calendar.DATE) + "-" + getStartDate().get(Calendar.MONTH) +
-                "-" + getStartDate().get(Calendar.YEAR) + "\nPatients: \n\n";
+                "-" + getStartDate().get(Calendar.YEAR) + "\nPatients: \n\n");
 
-        for(Patient patient: getPatients()){
-            getPatients();
-            output += patient + "\n\n";
+        ArrayList<Patient> patients = getPatients();
+
+        for(Patient patient: patients){
+            output.append(patient).append("\n\n");
         }
 
-        return "g";    }
+        return output.toString();
+    }
 }

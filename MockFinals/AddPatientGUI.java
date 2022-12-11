@@ -17,8 +17,8 @@ public class AddPatientGUI extends JFrame implements ActionListener, ListSelecti
     private Insets normalInsets = new Insets(10, 10, 0, 10);
     private Insets topInsets = new Insets(30, 10, 0, 10);
 
-    //private Patient patient; //You can uncomment this when you have written the Patient class
-    //private ArrayList<Patient> allPatients; //You can uncomment this when you have written the Patient class
+    private Patient patient; //You can uncomment this when you have written the Patient class
+    private ArrayList<Patient> allPatients; //You can uncomment this when you have written the Patient class
 
     private JTextField fnameField,lnameField, addressField, PPSNField, mobileField,
             bloodTypeField;
@@ -30,7 +30,7 @@ public class AddPatientGUI extends JFrame implements ActionListener, ListSelecti
 
     //You can uncomment this method when you have written the Patient class
 
-    /*public AddPatientGUI(ArrayList<Patient> allPatients)  {
+    public AddPatientGUI(ArrayList<Patient> allPatients)  {
 
         super("Add Patient Details");
 
@@ -49,11 +49,12 @@ public class AddPatientGUI extends JFrame implements ActionListener, ListSelecti
         setSize(600,500);
 
         //Add code to place this GUI at location (300,300) on the screen
+        setLocation(300,300);
 
 
         setVisible(true);
         this.allPatients = allPatients;
-    }*/
+    }
 
 
     private JPanel createTitlePanel() {
@@ -192,7 +193,20 @@ public class AddPatientGUI extends JFrame implements ActionListener, ListSelecti
         //then create a new Patient object using this data and add it to the allPatients array-list
 
         //finally display a message-dialog and destroy (dispose of) this GUI
+        int i = 0;
+        
+        String[] allergies = new String[selectedValuesList.size()];
 
+        for (String s:selectedValuesList) {
+            allergies[i] = selectedValuesList.get(i);
+            i++;
+        }
 
+        patient = new Patient(fnameField.getText(),lnameField.getText(),PPSNField.getText(),addressField.getText(),mobileField.getText(),
+                bloodTypeField.getText(),allergies);
+
+        allPatients.add(patient);
+
+        JOptionPane.showMessageDialog(null,"New Patient Added", "Patient Added",JOptionPane.INFORMATION_MESSAGE);
     }
 }

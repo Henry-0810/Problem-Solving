@@ -2,6 +2,7 @@ package MockFinals;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class Patient extends Person{
@@ -13,7 +14,7 @@ public class Patient extends Person{
         super(firstname, lastname, PPSN, address, mobile);
         setBloodType(bloodType);
         setAllergies(allergies);
-        this.appointments = new ArrayList<>();
+        appointments = new ArrayList<>();
     }
 
     public String getBloodType() {
@@ -36,13 +37,20 @@ public class Patient extends Person{
         return appointments;
     }
 
-    public void addAppointment(GregorianCalendar date){
-        this.appointments.add(date);
+    public void addAppointment(GregorianCalendar appointment){
+        appointments.add(appointment);
     }
 
     @Override
     public String toString() {
-        return super.toString() + "\nBlood-type: " + getBloodType() + "\nAllergies: " + Arrays.toString(getAllergies())
-                + "\nAppointments: " + getAppointments();
+        String output =  super.toString() + "\nBlood-type: " + getBloodType() + "\nAllergies: " + Arrays.toString(getAllergies())
+                + "\nAppointments: ";
+
+        for (GregorianCalendar appointment:getAppointments()) {
+            output += appointment.get(Calendar.DATE) + "-" + (appointment.get(Calendar.MONTH)+1) +
+                    "-" + appointment.get(Calendar.YEAR) + "   ";
+        }
+
+        return output;
     }
 }

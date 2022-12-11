@@ -9,14 +9,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 
 public class MedicalAppGUI extends JFrame implements ActionListener {
 
     private JMenu patientMenu;
     private JMenuItem item;
-    //private ArrayList<Doctor> allDoctors; //You can uncomment this when you have written the Doctor class
-    //private ArrayList<Patient> allPatients; //You can uncomment this when you have written the Patient class
+    private ArrayList<Doctor> allDoctors; //You can uncomment this when you have written the Doctor class
+    private ArrayList<Patient> allPatients; //You can uncomment this when you have written the Patient class
 
     public MedicalAppGUI()  {
 
@@ -36,6 +37,9 @@ public class MedicalAppGUI extends JFrame implements ActionListener {
         setVisible(true);
 
         //Add code here to call the TestPerson main() and also its getDoctors() and getPatients()
+        TestPerson.main(new String[]{});
+        allDoctors = TestPerson.getDoctors();
+        allPatients = TestPerson.getPatients();
 
     }
 
@@ -64,19 +68,35 @@ public class MedicalAppGUI extends JFrame implements ActionListener {
     public void actionPerformed (ActionEvent e){
 
         //Add code here for handling events on the various GUI menu-items
-
+        if(e.getActionCommand().equals("Add")) {
+            JOptionPane.showMessageDialog(null,"Adding new patient", "Adding Patient",
+                    JOptionPane.INFORMATION_MESSAGE);
+            addPatientGUI();
+        } else if (e.getActionCommand().equals("Remove")) {
+            JOptionPane.showMessageDialog(null,"Removing patient - not implemented yet",
+                    "Removing Patient",JOptionPane.INFORMATION_MESSAGE);
+        } else if (e.getActionCommand().equals("View")) {
+            viewPatients();
+        } else{
+            JOptionPane.showMessageDialog(null,"Bye", "Exit Application", JOptionPane.INFORMATION_MESSAGE);
+            System.exit(0);
+        }
     }
 
     public void addPatientGUI() {
-
-        //new AddPatientGUI(allPatients); //You can uncomment this when you have written the Patient class
+        new AddPatientGUI(allPatients); //You can uncomment this when you have written the Patient class
     }
 
     public void viewPatients() {
 
         //Add code here for the viewing the state of all the Patient objects within the
         //allPatients array-list
-
+        int i = 1;
+        for (Patient patient:allPatients) {
+            JOptionPane.showMessageDialog(null,"Patient " + i + "\n\n" + patient,
+                    "Patient Details", JOptionPane.INFORMATION_MESSAGE);
+            i++;
+        }
     }
 }
 
