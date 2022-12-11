@@ -64,6 +64,5 @@ public final class Doctor extends Person{
             output += patient + "\n\n";
         }
 
-        return "g";
-    }
+        return "g";    }
 }

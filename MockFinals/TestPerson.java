@@ -1,6 +1,5 @@
 package MockFinals;
 
-import jdk.incubator.vector.VectorOperators;
 
 import java.util.ArrayList;
 
